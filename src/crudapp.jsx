@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from 'axios'
-
+import userImage from './user (1).svg'
 
 const crudapp = () => {
     const [users, setUsers] = useState([])
@@ -19,13 +19,13 @@ const crudapp = () => {
     return (
         <div className="w-full py-20"> <div className=" max-w-screen-xl mx-auto px-5 xl:px-0">
             <h1 className=" text-4xl font-medium text-gray-900 ">Admin Dashboard</h1>
-            <div className=" w-full flex items-center flex-col lg:flex-row py-10">
+            <div className=" w-full flex items-center flex-col md:flex-row py-10">
                 <div><select className="py-3 px-2 border border-gray-200 bg-gray-100 mr-4 focus:outline-none" name="fl" id=""><option value="All">All</option>
                     <option value="Active">Acitve</option>
                     <option value="Inactive">Inactive</option>
                 </select></div>
-                <div className="flex flex-1 lg:mr-4"><input className=" px-3 py-3 focus:outline-none bg-gray-100 border border-gray-200 w-full" type="text" placeholder="Search Users" /></div>
-                <button className="lg:px-10 py-3 text-center w-full lg:w-56 text-base text-white font-medium bg-amber-900 ">Add New User</button>
+                <div className="flex flex-1 md:mr-4"><input className=" px-3 py-3 focus:outline-none bg-gray-100 border border-gray-200 w-full" type="text" placeholder="Search Users" /></div>
+                <button className="md:px-10 py-3 text-center w-full md:w-56 text-base text-white font-medium bg-amber-900 ">Add New User</button>
             </div>
             <div className="flex flex-col">
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -48,7 +48,7 @@ const crudapp = () => {
                     </th>
                     <th
                       scope="col"
-                      classNameName="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                     >
                       Role
                     </th>
@@ -79,11 +79,14 @@ const crudapp = () => {
                     
                   >
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
+                      <div className="flex items-center"><img src={userImage} className="w-10 h-10" alt="user" />
                         <div className="flex-shrink-0 h-10 w-10">
                           
                         </div>
-                        <div className="ml-4 md:ml-10">
+                                                <div className="ml-4 md:ml-10">
+                                                  
+
+                                                  
                           <div className="text-sm font-medium text-gray-900">
                             <span>{user.Name.firstName}</span>
                             {user.Name.lastName}
@@ -102,18 +105,18 @@ const crudapp = () => {
                      {user.role}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span
+                     { user.active &&  <span
                      
                         className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
                       >
                         Active
-                      </span>
-                      <span
+                      </span>}
+                      {!user.active && <span
                      
                         className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800"
                       >
                         Inactive
-                      </span>
+                      </span>}
                     </td>
                     
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
