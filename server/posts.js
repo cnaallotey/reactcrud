@@ -4,11 +4,12 @@ const router = express.Router()
 const data = require('./client.json')
 
 
-router.post('/client', (req, res) => {
+router.post('/addclient', (req, res) => {
     //adding a client
     const client = req.body;
     data.push(client);
     // fs.writeFileSync("./clients.json", client);
+    console.log(data)
     res.send(data);
 
 });
