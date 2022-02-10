@@ -18,19 +18,24 @@ const newUser = () => {
         e.preventDefault()
         
        
-        axios.post("http://localhost:3000/addclient", { Name: { firstName: firstName, lastName: lastName },
+        axios.post("http://localhost:3000/addclient", {
+            Name: { firstName: firstName, lastName: lastName },
             department: department,
             email: email,
             role: role,
             active: true,
-            status:"active",
+            status: "active",
             id: Math.floor(Math.random() * 100).toString(),
             
         })
-            .then(res => console.log(res.status))
-        .catch(err => console.log(err.message))
+            .then((res) => {document.getElementById("add-user-form").reset()
+             console.log(res.status)}
+            )
+            .catch(err => console.log(err.message))
+       
     }
     
+
 
 
 
@@ -39,6 +44,7 @@ const newUser = () => {
             <form
            
                 className="form bg-white p-6 relative"
+                id="add-user-form"
                 onSubmit={addUser}
           >
             <div
