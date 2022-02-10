@@ -1,5 +1,6 @@
 import Crudapp from "./crudapp"
 import Navbar from "./navbar"
+import Newuser from "./newuser"
 
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Crudapp/>
+      <Crudapp />
+      <Newuser />
       
       
     </div>
