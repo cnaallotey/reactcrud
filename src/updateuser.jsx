@@ -1,7 +1,35 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 
 
 
 const updateuser = () => {
+    const { id } = useParams()
+    const [user, setUser] = useState()
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [email, setEmail] = useState("")
+    const [role, setRole] = useState("")
+    const [department, setDepartment] = useState("")
+
+    useEffect(() => {
+        axios.get(`http://localhost:3000/client/editclient/${id}`)
+            .then(res => {
+                //console.log(res.data)
+            const profile = res.data
+               
+                 setFirstName(profile[0].Name.firstName)
+                 setLastName(profile[0].Name.lastName)
+                 setEmail(profile[0].email)
+                 setDepartment(profile[0].department)
+                 setRole(profile[0].role)
+        })
+    }, [])
+
+
+
+
     return (
         <div className="updateuser w-full"><div className="max-w-screen-md mx-auto px-5 xl:px-0">
         <form action="" class="form bg-white p-6 relative">
@@ -18,7 +46,12 @@ const updateuser = () => {
                 name=""
                 id=""
                 placeholder="First name"
-                class="border p-2 w-1/2"
+                        class="border p-2 w-1/2"
+                        value={firstName}
+                        onChange = {(e) =>{setFirstName(e.target.value)}}
+                        
+                        
+                        
                 
                 
               />
@@ -27,7 +60,9 @@ const updateuser = () => {
                 name=""
                 id=""
                 placeholder="Last Name"
-                class="border p-2 w-1/2"
+                        class="border p-2 w-1/2"
+                        value={lastName}
+                        onChange={(e) => {setLastName(e.target.value)}}
                 
               />
             </div>
@@ -36,7 +71,9 @@ const updateuser = () => {
               name=""
               id=""
               placeholder="Your Email"
-              class="border p-2 w-full mt-3"
+                    class="border p-2 w-full mt-3"
+                    value={email}
+                    onChange={(e) => { setEmail(e.target.value)}}
               
             />
             <input
@@ -44,7 +81,9 @@ const updateuser = () => {
               name=""
               id=""
               placeholder="Department"
-              class="border p-2 w-full mt-3"
+                    class="border p-2 w-full mt-3"
+                    value={department}
+                    onChange={(e) => {setDepartment(e.target.value)}}
               
             />
             <input
@@ -52,7 +91,9 @@ const updateuser = () => {
               name=""
               id=""
               placeholder="Role"
-              class="border p-2 w-full mt-3 mb-1"
+                    class="border p-2 w-full mt-3 mb-1"
+                    value={role}
+                    onChange={(e) => {setRole(e.target.value)}}
               
             />
             <div class="flex items-center">

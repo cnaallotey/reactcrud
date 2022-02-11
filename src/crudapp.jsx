@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from 'axios'
 import userImage from './user (1).svg'
+import { Link } from "react-router-dom";
 
 const crudapp = () => {
     const [users, setUsers] = useState([])
@@ -121,7 +122,8 @@ const crudapp = () => {
                     
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                      
-                     <div className="flex flex-row items-center">
+                                              <div className="flex flex-row items-center">
+                                                <Link to={`/updateuser/${user.id}`}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6 text-green-600 hover:text-green-900 mr-5"
@@ -136,7 +138,7 @@ const crudapp = () => {
                           stroke-width="2"
                           d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                         />
-                      </svg>
+                      </svg></Link>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6 text-red-600 hover:text-indigo-900"

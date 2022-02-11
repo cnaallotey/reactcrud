@@ -12,10 +12,10 @@ router.get('/loadclient', (req, res)=>{
 
 //editlient
 router.get('/client/editclient/:id', (req, res)=> {
- const deleteQuery = req.params.id;
+ const userQuery = req.params.id;
     const updateData = data.filter(i => 
-        i.id === deleteQuery)
+        i.id === userQuery)
     res.send(updateData)
-})
+}) 
 
 module.exports= router;
