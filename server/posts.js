@@ -9,7 +9,7 @@ router.post('/addclient', (req, res) => {
     const client = req.body;
     data.push(client);
     // fs.writeFileSync("./clients.json", client);
-    console.log(data)
+    console.log(data.length)
     res.send(data);
 
 });

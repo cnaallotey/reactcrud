@@ -8,11 +8,16 @@ const crudapp = () => {
     
 
     useEffect(() => {
-        axios.get('http://localhost:3000/loadclient')
+        axios.get('http://localhost:3001/loadclient')
             .then(res => setUsers(res.data))
         .catch(err => console.log(err.message))
 
     }, [])
+  const deleteUSer = async (id) => {
+    const response = await axios.delete(`http://localhost:3001/client/${id}`)
+    console.log(response.data)
+    setUsers(response.data)
+  }
 
 
 
@@ -26,7 +31,7 @@ const crudapp = () => {
                     <option value="Inactive">Inactive</option>
                 </select></div>
                 <div className="flex flex-1 md:mr-4"><input className=" px-3 py-3 focus:outline-none bg-gray-100 border border-gray-200 w-full" type="text" placeholder="Search Users" /></div>
-                <button className="md:px-10 py-3 text-center w-full md:w-56 text-base text-white font-medium bg-amber-900 ">Add New User</button>
+                <Link to="/adduser" className="md:px-10 py-3 text-center w-full md:w-56 text-base text-white font-medium bg-amber-900 ">Add New User</Link>
             </div>
             <div className="flex flex-col">
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -139,12 +144,14 @@ const crudapp = () => {
                           d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                         />
                       </svg></Link>
-                      <svg
+                                                <svg
+                                                  onClick={() => {deleteUSer(user.id)}}
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6 text-red-600 hover:text-indigo-900"
                         fill="none"
                         viewBox="0 0 24 24"
-                        stroke="currentColor"
+                                                  stroke="currentColor"
+                            
                     
                       >
                         <path

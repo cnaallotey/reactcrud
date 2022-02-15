@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router()
-data = require('./client.json')
+const data = require('./client.json')
 
 
 

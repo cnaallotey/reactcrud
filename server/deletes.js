@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 //const cors = require('cors')
-data = require('./client.json')
+const data = require('./client.json')
 
 
 //delete a client
@@ -10,7 +10,8 @@ router.delete('/client/:id', (req, res) => {
     
     
     data = data.filter(i => i.id !== query);
-    //console.log(data)
+    
+    console.log(data.length)
     res.send(data);
     //console.log("client has been deleted");
 

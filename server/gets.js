@@ -6,7 +6,7 @@ data = require('./client.json')
 
 //loading all clients
 router.get('/loadclient', (req, res)=>{
-    res.json(data)
+    res.send(data)
     //console.log('Clients have been Loaded')
 })
 

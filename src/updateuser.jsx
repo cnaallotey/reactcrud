@@ -14,7 +14,7 @@ const updateuser = () => {
     const [department, setDepartment] = useState("")
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/client/editclient/${id}`)
+        axios.get(`http://localhost:3001/client/editclient/${id}`)
             .then(res => {
                 //console.log(res.data)
             const profile = res.data

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import {useNavigate} from 'react-router-dom'
+import { use } from "../server/gets";
 
 
 
@@ -13,30 +15,28 @@ const newUser = () => {
     const [email, setEmail] = useState("")
     const [department, setDepartment] = useState("")
     const [role, setRole] = useState("")
+    const navigate = useNavigate()
     
     const addUser = (e) => {
-        e.preventDefault()
-        
-       
-        axios.post("http://localhost:3000/addclient", {
-            Name: { firstName: firstName, lastName: lastName },
-            department: department,
-            email: email,
-            role: role,
-            active: true,
-            status: "active",
-            id: Math.floor(Math.random() * 100).toString(),
+      e.preventDefault()
+      console.log(lastName)
+      axios
+          .post("http://localhost:3001/client", {
+            'Name': { 'firstName': firstName, 'lastName': lastName },
+            'department': department,
+            'email': email,
+            'role': role,
+            'active': true,
+            'status':"active",
+            'id': Math.floor(Math.random() * 100).toString(),
+          })
+       .then((res) => {
             
-        })
-            .then((res) => {document.getElementById("add-user-form").reset()
-             console.log(res.status)}
-            )
-            .catch(err => console.log(err.message))
+            console.log(res.data)
+          });
        
     }
     
-
-
 
 
     return (
@@ -51,7 +51,7 @@ const newUser = () => {
               className="icon bg-white text-white w-6 h-6 absolute flex items-center justify-center p-5"
             
             >
-              <i className="fal fa-phone-volume fa-fw text-2xl transform -rotate-45"></i>
+              
             </div>
             <h3 className="text-2xl text-gray-900 font-semibold text-center ">Add a new User</h3>
             <div className="flex space-x-5 mt-3">
