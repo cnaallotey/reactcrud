@@ -1,31 +1,38 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import axios from "axios";
 import { useParams } from "react-router";
 
 
 
 const updateuser = () => {
-    const { id } = useParams()
-    const [user, setUser] = useState()
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [email, setEmail] = useState("")
-    const [role, setRole] = useState("")
-    const [department, setDepartment] = useState("")
+  const { id } = useParams()
+  const editUser = useState(null)
+  const [firstName, setFirstname] = useState("")
+  const [lastName, setLastname] = useState("")
+  const [email, setEmail] = useState("")
+  const [role, setRole] = useState("")
+  const [department, setDepartment] = useState("")
+  const [active, setActive] = useState(null)
+  const [status, setStatus] = useState("")
 
-    useEffect(() => {
-        axios.get(`http://localhost:3001/client/editclient/${id}`)
-            .then(res => {
-                //console.log(res.data)
-            const profile = res.data
-               
-                 setFirstName(profile[0].Name.firstName)
-                 setLastName(profile[0].Name.lastName)
-                 setEmail(profile[0].email)
-                 setDepartment(profile[0].department)
-                 setRole(profile[0].role)
-        })
-    }, [])
+
+  
+
+  useEffect(() => {
+    axios.get(`http://localhost:3001/client/editclient/${id}`)
+      .then(res => {
+        console.log(res.data)
+        setFirstname(res.data[0].Name.firstName)
+        setLastname(res.data[0].Name.lastName)
+        setEmail(res.data[0].email)
+        setRole(res.data[0].role)
+        setDepartment(res.data[0].department)
+        setActive(res.data[0].active)
+        setStatus(res.data[0].status)
+      }
+      )
+  })
+
 
 
 
@@ -46,12 +53,10 @@ const updateuser = () => {
                 name=""
                 id=""
                 placeholder="First name"
-                        class="border p-2 w-1/2"
-                        value={firstName}
-                        onChange = {(e) =>{setFirstName(e.target.value)}}
-                        
-                        
-                        
+              class="border p-2 w-1/2"
+              value={firstName}
+              onChange={(e) =>{ setFirstname(e.target.value)}}
+            
                 
                 
               />
@@ -60,9 +65,9 @@ const updateuser = () => {
                 name=""
                 id=""
                 placeholder="Last Name"
-                        class="border p-2 w-1/2"
-                        value={lastName}
-                        onChange={(e) => {setLastName(e.target.value)}}
+              class="border p-2 w-1/2"
+              value={lastName}
+              onChange={(e) =>{ setLastname(e.target.value)}}
                 
               />
             </div>
@@ -71,9 +76,9 @@ const updateuser = () => {
               name=""
               id=""
               placeholder="Your Email"
-                    class="border p-2 w-full mt-3"
-                    value={email}
-                    onChange={(e) => { setEmail(e.target.value)}}
+            class="border p-2 w-full mt-3"
+            value={email}
+              onChange={(e) =>{ setEmail(e.target.value)}}
               
             />
             <input
@@ -81,9 +86,9 @@ const updateuser = () => {
               name=""
               id=""
               placeholder="Department"
-                    class="border p-2 w-full mt-3"
-                    value={department}
-                    onChange={(e) => {setDepartment(e.target.value)}}
+            class="border p-2 w-full mt-3"
+            value={department}
+              onChange={(e) =>{ setDepartment(e.target.value)}}
               
             />
             <input
@@ -91,9 +96,9 @@ const updateuser = () => {
               name=""
               id=""
               placeholder="Role"
-                    class="border p-2 w-full mt-3 mb-1"
-                    value={role}
-                    onChange={(e) => {setRole(e.target.value)}}
+            class="border p-2 w-full mt-3 mb-1"
+            value={role}
+            onChange={(e) =>{ setRole(e.target.value)}}
               
             />
             <div class="flex items-center">
@@ -113,8 +118,9 @@ const updateuser = () => {
                 
         ></label>
         
-    </div><p class="ml-3 pt-2" v-if="active">Activated</p><p class="ml-3 pt-2" v-if="!active">Deactivated   
-  </p></div>
+            </div>{active && <p class="ml-3 pt-2" >Activated</p>} 
+      {!active &&      <p class="ml-3 pt-2" >Deactivated
+  </p>}</div>
             <div class="mt-4">
               <p class="text-xs font-normal text-red-500" v-if="error">
                 Please fill all spaces
