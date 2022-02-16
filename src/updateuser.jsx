@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 
 
@@ -14,6 +14,25 @@ const updateuser = () => {
   const [department, setDepartment] = useState("")
   const [active, setActive] = useState(null)
   const [status, setStatus] = useState("")
+  const navigate = useNavigate()
+
+  const updateUser = (e) => {
+    e.preventDefault()
+    axios.put(`http://localhost:3001/client/updateclient/${id}`, {
+       'Name': { 'firstName': firstName, 'lastName': lastName },
+            'department': department,
+            'email': email,
+            'role': role,
+            'active': active,
+      'status': status,
+            'id': id
+            
+    }).then(res => {
+      console.log(res.data)
+      navigate('/')
+    })
+
+  }
 
 
   
@@ -31,7 +50,7 @@ const updateuser = () => {
         setStatus(res.data[0].status)
       }
       )
-  })
+  },[])
 
 
 
@@ -39,7 +58,7 @@ const updateuser = () => {
 
     return (
         <div className="updateuser w-full"><div className="max-w-screen-md mx-auto px-5 xl:px-0">
-        <form action="" class="form bg-white p-6 relative">
+        <form action="" onSubmit={()=>{updateUser()}} class="form bg-white p-6 relative">
             <div
               class="icon bg-white text-white w-6 h-6 absolute flex items-center justify-center p-5"
               

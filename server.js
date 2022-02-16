@@ -17,19 +17,13 @@ const app = express()
 app.use(cors())
 
 
-//loading all clients
-app.get('/loadclient', (req, res) => {
-    console.log(data)
-    res.send(data)
-    //console.log('Clients have been Loaded')
-})
+//configuring body parser middle ware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
-app.get('/client/editclient/:id', (req, res)=> {
- const userQuery = req.params.id;
-    const updateData = data.filter(i => 
-        i.id === userQuery)
-    res.send(updateData)
-}) 
+// //import get routes
+const getRoutes = require('./server/gets')
+app.use('/', getRoutes)
 
 //delete a client
 app.delete('/client/:id', (req, res) => {
@@ -54,9 +48,8 @@ app.post('/client', (req, res) => {
 
 });
 
-
 //updating a client
-router.put('/client/updateclient/:id', (req, res) => {
+app.put('/client/updateclient/:id', (req, res) => {
 
     const found = data.findIndex(obj => obj.id === req.params.id)
     data[found].Name.firstName = req.body.firstName;
@@ -69,7 +62,6 @@ router.put('/client/updateclient/:id', (req, res) => {
     res.send(data);
 
 })
-
 
 
 //configuring body parser middle ware
