@@ -16,10 +16,10 @@ const updateuser = () => {
   const [status, setStatus] = useState("")
   const navigate = useNavigate()
 
-  const updateUser = (e) => {
-    e.preventDefault()
+  const updateUser = () => {
     axios.put(`http://localhost:3001/client/updateclient/${id}`, {
-       'Name': { 'firstName': firstName, 'lastName': lastName },
+            'firstName': firstName,
+            'lastName': lastName,
             'department': department,
             'email': email,
             'role': role,
@@ -58,7 +58,7 @@ const updateuser = () => {
 
     return (
         <div className="updateuser w-full"><div className="max-w-screen-md mx-auto px-5 xl:px-0">
-        <form action="" onSubmit={()=>{updateUser()}} class="form bg-white p-6 relative">
+        <form action="" onSubmit={(e) => { e.preventDefault(); updateUser()}} class="form bg-white p-6 relative">
             <div
               class="icon bg-white text-white w-6 h-6 absolute flex items-center justify-center p-5"
               

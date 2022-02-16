@@ -31,7 +31,7 @@ const newUser = () => {
             'id': Math.floor(Math.random() * 100).toString(),
           })
        .then((res) => {
-            
+            navigate('/')
             console.log(res.data)
           });
        
